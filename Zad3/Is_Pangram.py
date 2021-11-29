@@ -1,3 +1,4 @@
+
 class Is_Pangram:
     def check(self, text):
         if isinstance(text, str):
