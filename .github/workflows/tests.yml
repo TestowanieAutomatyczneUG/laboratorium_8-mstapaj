@@ -16,5 +16,6 @@ jobs:
           pip install nose2
       - name: Run tests for exercises 1,2,3
         run: |
+            nose2
             nose2 --with-coverage
             
