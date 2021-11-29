@@ -1,4 +1,0 @@
-pyhamcrest
-parameterized
-coverage
-coveralls
