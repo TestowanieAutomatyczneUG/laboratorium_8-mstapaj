@@ -13,8 +13,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r Zad1/requirements.txt
-          pip install nose2 parametrized hamcrest
+          pip install nose2 parametrized hamcrest wheel coverage
       - name: Run tests for exercises 1,2,3
         run: |
             python -m nose2 --with-coverage Zad2
