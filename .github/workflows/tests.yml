@@ -20,13 +20,14 @@ jobs:
           cd ../Zad3
           pip install nose2 coverage
           cd ..
+          pip install coveralls
       - name: Run tests for exercises 1,2,3
         run: |
+            coverage
             python -m nose2 --with-coverage Zad2
             python -m nose2 --with-coverage Zad3
             cd Zad1
             python -m coverage run setup.py test
-      - name: Coveralls Python
-        uses: AndreMiras/coveralls-python-action@v20201129
+
 
             
