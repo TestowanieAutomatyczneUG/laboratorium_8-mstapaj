@@ -1,33 +1,45 @@
-
 name: CI
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+    push:
+        branches: [main]
+    workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          cd Zad1
-          pip install nose2 parameterized pyhamcrest wheel coverage
-          cd ../Zad2
-          pip install nose2 parameterized coverage
-          cd ../Zad3
-          pip install nose2 coverage
-          cd ..
-          pip install coveralls
-      - name: Run tests for exercises 1,2,3
-        run: |
-            coverage
-            python -m nose2 --with-coverage Zad2
-            python -m nose2 --with-coverage Zad3
-            cd Zad1
-            python -m coverage run setup.py test
-
-
-            
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Install dependencies
+              run: |
+                  python -m pip install --upgrade pip
+                  cd Zad1
+                  pip install nose2 parameterized pyhamcrest wheel coverage
+                  cd ../Zad2
+                  pip install nose2 parameterized coverage
+                  cd ../Zad3
+                  pip install nose2 coverage
+                  cd ..
+                  pip install coveralls
+            - name: Run tests for exercises 1,2,3
+              run: |
+                  coverage
+                  python -m nose2 --with-coverage Zad2
+                  python -m nose2 --with-coverage Zad3
+                  cd Zad1
+                  python -m coverage run setup.py test
+            - name: Upload coverage data to coveralls.io
+              run: coveralls --service=github
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    coveralls:
+        name: Indicate completion to coveralls.io
+        needs: test
+        runs-on: ubuntu-latest
+        container: python:3-slim
+        steps:
+            - name: Finished
+              run: |
+                  pip3 install --upgrade coveralls
+                  coveralls --service=github --finish
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
