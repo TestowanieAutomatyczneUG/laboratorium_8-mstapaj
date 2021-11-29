@@ -14,9 +14,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           cd Zad1
-          pip install nose2 parametrized pyhamcrest wheel coverage
+          pip install nose2 parameterized pyhamcrest wheel coverage
           cd ../Zad2
-          pip install nose2 parametrized coverage
+          pip install nose2 parameterized coverage
           cd ../Zad3
           pip install nose2 coverage
           cd ..
