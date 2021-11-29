@@ -26,4 +26,7 @@ jobs:
             python -m nose2 --with-coverage Zad3
             cd Zad1
             python -m coverage run setup.py test
+      - name: Coveralls Python
+        uses: AndreMiras/coveralls-python-action@v20201129
+
             
